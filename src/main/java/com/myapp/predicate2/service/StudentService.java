@@ -31,6 +31,14 @@ public class StudentService {
                 .toList();
     }
 
+    public List<StudentDTO> findStudentByFilter(List<SearchFilter> searchFilters) {
+        Specification<Student> specification = filterSpecification.getSearchSpecification(searchFilters);
+        List<Student> students = studentRepository.findAll(specification);
+        return students.stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .toList();
+    }
+
     public List<StudentDTO> findStudentByCity(String city) {
         return studentRepository.findByAddressCity(city)
                 .stream()

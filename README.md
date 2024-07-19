@@ -1,1 +1,73 @@
-"# spring-predicate-ex-2" 
+# Student Controller API
+
+This API provides various endpoints to interact with student data. Below are the details and usage examples for each endpoint.
+
+## Endpoints
+
+### 1. Get Student By Name
+
+**URL:** `GET /v1/student/{name}`
+
+**Description:** Retrieves a student by their name.
+
+**Example Request:**
+```sh
+curl -X GET "http://localhost:8080/v1/student/Henry%20Taylor"
+```
+
+### 2. Get Student By Filter
+
+**URL:** `GET /v1/student/filter`
+
+**Description:** Retrieves a student by column filter.
+
+**Example Request:**
+```sh
+curl -X GET "http://localhost:8080/v1/student/filter?column=id&value=2""
+```
+
+### 3. Get Student By Filters
+
+**URL:** `GET /v1/student/filters`
+
+**Description:** Retrieves a student by multiple column filters.
+
+**Example Request:**
+```sh
+curl -X GET "curl --location 'http://localhost:8080/v1/student/filters' \
+--header 'Content-Type: application/json' \
+--data '
+    [
+        {
+            "column" : "id",
+            "value" : "2"
+        },
+        {
+            "column" : "name",
+            "value" : "Charlie Davis"
+        }
+    ]
+'"
+```
+
+### 4. Get Student By City
+
+**URL:** `GET /v1/student/city/{city}`
+
+**Description:** Retrieves a student by city.
+
+**Example Request:**
+```sh
+curl -X GET "http://localhost:8080/v1/student/city/Phoenix"
+```
+
+### 5. Get Student By Subject
+
+**URL:** `GET /v1/subject/{subjectName}`
+
+**Description:** Retrieves a student by subject.
+
+**Example Request:**
+```sh
+curl -X GET "http://localhost:8080/v1/student/subject/English"
+```
