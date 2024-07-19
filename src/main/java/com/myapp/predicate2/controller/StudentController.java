@@ -1,5 +1,6 @@
 package com.myapp.predicate2.controller;
 
+import com.myapp.predicate2.dto.SearchFilter;
 import com.myapp.predicate2.dto.StudentDTO;
 import com.myapp.predicate2.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,11 @@ public class StudentController {
     @GetMapping("/{name}")
     public StudentDTO getStudentByName(@PathVariable(name = "name") String name) {
         return studentService.findStudentByName(name);
+    }
+
+    @GetMapping("/filter")
+    public List<StudentDTO> getStudentByFilter(SearchFilter searchFilter) {
+        return studentService.findStudentByFilter(searchFilter);
     }
 
     @GetMapping("/city/{city}")

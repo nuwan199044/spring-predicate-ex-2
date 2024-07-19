@@ -1,9 +1,13 @@
 package com.myapp.predicate2.service;
 
+import com.myapp.predicate2.dto.SearchFilter;
 import com.myapp.predicate2.dto.StudentDTO;
+import com.myapp.predicate2.entity.Student;
 import com.myapp.predicate2.repository.StudentRepository;
+import com.myapp.predicate2.specification.FilterSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +17,18 @@ import java.util.List;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final FilterSpecification<Student> filterSpecification;
     private final ModelMapper modelMapper;
 
     public StudentDTO findStudentByName(String name) {
         return modelMapper.map(studentRepository.findByName(name), StudentDTO.class);
+    }
+
+    public List<StudentDTO> findStudentByFilter(SearchFilter searchFilter) {
+        Specification<Student> specification = filterSpecification.getSearchSpecification(searchFilter);
+        return studentRepository.findAll(specification).stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .toList();
     }
 
     public List<StudentDTO> findStudentByCity(String city) {
