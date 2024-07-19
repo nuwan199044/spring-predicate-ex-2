@@ -50,4 +50,26 @@ public class FilterSpecification<T> {
         };
     }
 
+    public Specification<T> getSearchSpecificationWithEqAndLike(SearchRequest searchRequest) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            for (SearchFilter sf : searchRequest.getFilters()) {
+                switch (sf.getOperation()) {
+                    case EQUAL :
+                        predicates.add(criteriaBuilder.equal(root.get(sf.getColumn()), sf.getValue()));
+                        break;
+                    case LIKE :
+                        predicates.add(criteriaBuilder.like(root.get(sf.getColumn()), "%"+sf.getValue()+"%"));
+                        break;
+                }
+            }
+
+            if (searchRequest.getGlobalOperator().equals(GlobalOperator.AND)) {
+                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            } else {
+                return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+            }
+        };
+    }
+
 }

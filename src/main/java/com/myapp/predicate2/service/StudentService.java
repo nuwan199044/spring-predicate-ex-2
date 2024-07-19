@@ -48,6 +48,14 @@ public class StudentService {
                 .toList();
     }
 
+    public List<StudentDTO> findStudentByFilterOperation(SearchRequest searchRequest) {
+        Specification<Student> specification = filterSpecification.getSearchSpecificationWithEqAndLike(searchRequest);
+        List<Student> students = studentRepository.findAll(specification);
+        return students.stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .toList();
+    }
+
     public List<StudentDTO> findStudentByCity(String city) {
         return studentRepository.findByAddressCity(city)
                 .stream()

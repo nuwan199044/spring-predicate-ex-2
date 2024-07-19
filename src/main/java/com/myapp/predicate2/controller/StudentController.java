@@ -41,6 +41,11 @@ public class StudentController {
         return studentService.findStudentByFilter(searchRequest);
     }
 
+    @PostMapping("/filtersWithOperation")
+    public List<StudentDTO> getStudentByFiltersWithOperation(@RequestBody SearchRequest searchRequest) {
+        return studentService.findStudentByFilterOperation(searchRequest);
+    }
+
     @GetMapping("/city/{city}")
     public List<StudentDTO> getStudentByCity(@PathVariable(name = "city") String city) {
         return studentService.findStudentByCity(city);

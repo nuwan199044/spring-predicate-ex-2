@@ -97,3 +97,31 @@ curl -X POST "curl --location 'http://localhost:8080/v1/student/filtersWithCondi
 }
 '"
 ```
+
+### 7. Get Student By Filters With Operation
+
+**URL:** `GET /v1/student/filtersWithOperation`
+
+**Description:** Retrieves a student by multiple filters with operations.
+
+**Example Request:**
+```sh
+curl -X POST "curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "id",
+            "value" : "2",
+            "operation" : "EQUAL"
+        },
+        {
+            "column" : "name",
+            "value" : "Da",
+            "operation" : "LIKE"
+        }
+    ]
+}'"
+```
+
