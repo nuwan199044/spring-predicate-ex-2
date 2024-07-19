@@ -1,6 +1,8 @@
 package com.myapp.predicate2.specification;
 
 import com.myapp.predicate2.dto.SearchFilter;
+import com.myapp.predicate2.dto.SearchRequest;
+import com.myapp.predicate2.enums.GlobalOperator;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -30,6 +32,21 @@ public class FilterSpecification<T> {
                 predicates.add(criteriaBuilder.equal(root.get(sf.getColumn()), sf.getValue()));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+    public Specification<T> getSearchSpecification(SearchRequest searchRequest) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            for (SearchFilter sf : searchRequest.getFilters()) {
+                predicates.add(criteriaBuilder.equal(root.get(sf.getColumn()), sf.getValue()));
+            }
+
+            if (searchRequest.getGlobalOperator().equals(GlobalOperator.AND)) {
+                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            } else {
+                return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+            }
         };
     }
 

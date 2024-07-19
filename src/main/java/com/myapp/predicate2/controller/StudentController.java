@@ -1,6 +1,7 @@
 package com.myapp.predicate2.controller;
 
 import com.myapp.predicate2.dto.SearchFilter;
+import com.myapp.predicate2.dto.SearchRequest;
 import com.myapp.predicate2.dto.StudentDTO;
 import com.myapp.predicate2.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class StudentController {
     @PostMapping("/filters")
     public List<StudentDTO> getStudentByFilters(@RequestBody List<SearchFilter> searchFilters) {
         return studentService.findStudentByFilter(searchFilters);
+    }
+
+    @PostMapping("/filtersWithCondition")
+    public List<StudentDTO> getStudentByFiltersWithCondition(@RequestBody SearchRequest searchRequest) {
+        return studentService.findStudentByFilter(searchRequest);
     }
 
     @GetMapping("/city/{city}")

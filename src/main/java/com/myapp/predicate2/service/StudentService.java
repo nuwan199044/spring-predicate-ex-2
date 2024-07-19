@@ -1,6 +1,7 @@
 package com.myapp.predicate2.service;
 
 import com.myapp.predicate2.dto.SearchFilter;
+import com.myapp.predicate2.dto.SearchRequest;
 import com.myapp.predicate2.dto.StudentDTO;
 import com.myapp.predicate2.entity.Student;
 import com.myapp.predicate2.repository.StudentRepository;
@@ -33,6 +34,14 @@ public class StudentService {
 
     public List<StudentDTO> findStudentByFilter(List<SearchFilter> searchFilters) {
         Specification<Student> specification = filterSpecification.getSearchSpecification(searchFilters);
+        List<Student> students = studentRepository.findAll(specification);
+        return students.stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .toList();
+    }
+
+    public List<StudentDTO> findStudentByFilter(SearchRequest searchRequest) {
+        Specification<Student> specification = filterSpecification.getSearchSpecification(searchRequest);
         List<Student> students = studentRepository.findAll(specification);
         return students.stream()
                 .map(student -> modelMapper.map(student, StudentDTO.class))

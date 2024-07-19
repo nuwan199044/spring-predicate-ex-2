@@ -34,7 +34,7 @@ curl -X GET "http://localhost:8080/v1/student/filter?column=id&value=2""
 
 **Example Request:**
 ```sh
-curl -X GET "curl --location 'http://localhost:8080/v1/student/filters' \
+curl -X POST "curl --location 'http://localhost:8080/v1/student/filters' \
 --header 'Content-Type: application/json' \
 --data '
     [
@@ -63,11 +63,37 @@ curl -X GET "http://localhost:8080/v1/student/city/Phoenix"
 
 ### 5. Get Student By Subject
 
-**URL:** `GET /v1/subject/{subjectName}`
+**URL:** `GET /v1/student/subject/{subjectName}`
 
 **Description:** Retrieves a student by subject.
 
 **Example Request:**
 ```sh
 curl -X GET "http://localhost:8080/v1/student/subject/English"
+```
+
+### 6. Get Student By Filters With Condition
+
+**URL:** `GET /v1/student/filtersWithCondition`
+
+**Description:** Retrieves a student by multiple filters with condition.
+
+**Example Request:**
+```sh
+curl -X POST "curl --location 'http://localhost:8080/v1/student/filtersWithCondition' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "id",
+            "value" : "2"
+        },
+        {
+            "column" : "name",
+            "value" : "Charlie Davis"
+        }
+    ]
+}
+'"
 ```
