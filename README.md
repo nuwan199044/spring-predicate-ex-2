@@ -127,6 +127,32 @@ curl -X POST "curl --location 'http://localhost:8080/v1/student/filtersWithOpera
             "operation" : "LIKE"
         }
     ]
+}'
+
+curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "id",
+            "value" : "6",
+            "operation" : "GREATER_THAN"
+        }
+    ]
+}'
+
+curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "id",
+            "value" : "6",
+            "operation" : "LESS_THAN"
+        }
+    ]
 }'"
 ```
 

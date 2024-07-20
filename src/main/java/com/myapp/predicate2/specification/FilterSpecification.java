@@ -66,6 +66,12 @@ public class FilterSpecification<T> {
                         String[] splitValues = sf.getValue().split(",");
                         predicates.add(root.get(sf.getColumn()).in(Arrays.asList(splitValues)));
                         break;
+                    case GREATER_THAN :
+                        predicates.add(criteriaBuilder.greaterThan(root.get(sf.getColumn()), sf.getValue()));
+                        break;
+                    case LESS_THAN :
+                        predicates.add(criteriaBuilder.lessThan(root.get(sf.getColumn()), sf.getValue()));
+                        break;
                 }
             }
 
