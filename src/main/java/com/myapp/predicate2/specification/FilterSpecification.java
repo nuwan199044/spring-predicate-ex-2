@@ -76,6 +76,9 @@ public class FilterSpecification<T> {
                         String[] splitBetween = sf.getValue().split(",");
                         predicates.add(criteriaBuilder.between(root.get(sf.getColumn()), splitBetween[0], splitBetween[1]));
                         break;
+                    case JOIN :
+                        predicates.add(criteriaBuilder.equal(root.join(sf.getJoinTable()).get(sf.getColumn()), sf.getValue()));
+                        break;
                 }
             }
 

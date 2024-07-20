@@ -14,4 +14,5 @@ public class SearchFilter {
     private String column;
     private String value;
     private Operation operation;
+    private String joinTable;
 }

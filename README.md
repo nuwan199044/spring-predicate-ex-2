@@ -166,6 +166,20 @@ curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
             "operation" : "BETWEEN"
         }
     ]
+}'
+
+curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "city",
+            "value" : "Chicago",
+            "joinTable" : "address",
+            "operation" : "JOIN"
+        }
+    ]
 }'"
 ```
 
