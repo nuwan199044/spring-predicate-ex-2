@@ -5,5 +5,6 @@ public enum Operation {
     LIKE,
     IN,
     GREATER_THAN,
-    LESS_THAN
+    LESS_THAN,
+    BETWEEN
 }

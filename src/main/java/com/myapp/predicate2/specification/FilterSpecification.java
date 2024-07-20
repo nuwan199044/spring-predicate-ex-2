@@ -72,6 +72,10 @@ public class FilterSpecification<T> {
                     case LESS_THAN :
                         predicates.add(criteriaBuilder.lessThan(root.get(sf.getColumn()), sf.getValue()));
                         break;
+                    case BETWEEN :
+                        String[] splitBetween = sf.getValue().split(",");
+                        predicates.add(criteriaBuilder.between(root.get(sf.getColumn()), splitBetween[0], splitBetween[1]));
+                        break;
                 }
             }
 

@@ -153,6 +153,19 @@ curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
             "operation" : "LESS_THAN"
         }
     ]
+}'
+
+curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "filters" : [
+        {
+            "column" : "id",
+            "value" : "2,5",
+            "operation" : "BETWEEN"
+        }
+    ]
 }'"
 ```
 
