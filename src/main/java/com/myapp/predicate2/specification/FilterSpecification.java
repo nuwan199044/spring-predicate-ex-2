@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -60,6 +61,10 @@ public class FilterSpecification<T> {
                         break;
                     case LIKE :
                         predicates.add(criteriaBuilder.like(root.get(sf.getColumn()), "%"+sf.getValue()+"%"));
+                        break;
+                    case IN :
+                        String[] splitValues = sf.getValue().split(",");
+                        predicates.add(root.get(sf.getColumn()).in(Arrays.asList(splitValues)));
                         break;
                 }
             }

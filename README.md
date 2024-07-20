@@ -113,7 +113,12 @@ curl -X POST "curl --location 'http://localhost:8080/v1/student/filtersWithOpera
     "filters" : [
         {
             "column" : "id",
-            "value" : "2",
+            "value" : "2,4,6",
+            "operation" : "IN"
+        },
+        {
+            "column" : "id",
+            "value" : "5",
             "operation" : "EQUAL"
         },
         {
