@@ -5,6 +5,7 @@ import com.myapp.predicate2.dto.SearchRequest;
 import com.myapp.predicate2.dto.StudentDTO;
 import com.myapp.predicate2.service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,11 @@ public class StudentController {
     @PostMapping("/filtersWithOperation")
     public List<StudentDTO> getStudentByFiltersWithOperation(@RequestBody SearchRequest searchRequest) {
         return studentService.findStudentByFilterOperation(searchRequest);
+    }
+
+    @PostMapping("/filtersWithOperation/pagination")
+    public Page<StudentDTO> getStudentByFiltersWithOperationAndPagination(@RequestBody SearchRequest searchRequest) {
+        return studentService.findStudentByFilterOperationAndPagination(searchRequest);
     }
 
     @GetMapping("/city/{city}")

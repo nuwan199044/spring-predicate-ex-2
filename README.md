@@ -183,3 +183,31 @@ curl --location 'http://localhost:8080/v1/student/filtersWithOperation' \
 }'"
 ```
 
+### 8. Get Student By Filters With Pagination
+
+**URL:** `GET /v1/student/filtersWithOperation/pagination`
+
+**Description:** Retrieves a student by multiple filters with pagination.
+
+**Example Request:**
+```sh
+curl --location 'http://localhost:8080/v1/student/filtersWithOperation/pagination' \
+--header 'Content-Type: application/json' \
+--data '{
+    "globalOperator" : "OR",
+    "page": {
+        "pageNo": 1,
+        "pageSize": 2,
+        "sort": "ASC",
+        "sortColumn": "studentId"
+    },
+    "filters" : [
+        {
+            "column" : "name",
+            "value" : "a",
+            "operation" : "LIKE"
+        }
+    ]
+}'"
+```
+

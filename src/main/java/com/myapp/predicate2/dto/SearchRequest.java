@@ -15,4 +15,5 @@ import java.util.List;
 public class SearchRequest {
     private List<SearchFilter> filters;
     private GlobalOperator globalOperator;
+    private PageRequestDto page;
 }

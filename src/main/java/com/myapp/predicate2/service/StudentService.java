@@ -1,5 +1,6 @@
 package com.myapp.predicate2.service;
 
+import com.myapp.predicate2.dto.PageRequestDto;
 import com.myapp.predicate2.dto.SearchFilter;
 import com.myapp.predicate2.dto.SearchRequest;
 import com.myapp.predicate2.dto.StudentDTO;
@@ -8,6 +9,8 @@ import com.myapp.predicate2.repository.StudentRepository;
 import com.myapp.predicate2.specification.FilterSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +57,14 @@ public class StudentService {
         return students.stream()
                 .map(student -> modelMapper.map(student, StudentDTO.class))
                 .toList();
+    }
+
+    public Page<StudentDTO> findStudentByFilterOperationAndPagination(SearchRequest searchRequest) {
+        Specification<Student> specification = filterSpecification.getSearchSpecificationWithEqAndLike(searchRequest);
+        Pageable page = new PageRequestDto().getPageable(searchRequest.getPage());
+        Page<Student> studentPage = studentRepository.findAll(specification, page);
+        return studentPage.map(student -> modelMapper.map(student, StudentDTO.class));
+
     }
 
     public List<StudentDTO> findStudentByCity(String city) {
